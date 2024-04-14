@@ -14,10 +14,9 @@ public class Graph {
         alist.add(currentlList);
     }
     
-    public void addEdge(int src, int dst) {
+    public void addEdge(int src, Node dst) {
         LinkedList<Node> currentlList = alist.get(src);
-        Node dstNode = alist.get(dst).get(0);
-        currentlList.add(dstNode);
+        currentlList.add(dst);
 
     }
 
@@ -45,13 +44,13 @@ public class Graph {
     }
 
     private void removeNode(Node node) {
-        
+
     }
 
     public void print() {
         for (LinkedList<Node> currentList : alist) {
             for (Node node : currentList) {
-                System.out.print(node.data + " ->");
+                System.out.print(node.data + "|" + node.weight + " ->");
             }
             System.out.println();
         }

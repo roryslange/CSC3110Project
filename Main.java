@@ -12,16 +12,16 @@ public class Main {
         graph.addNode(new Node('D'));
         graph.addNode(new Node('E'));
 
-        graph.addEdge(0, 1);
-        graph.addEdge(0, 2);
-        graph.addEdge(0, 4);
-        graph.addEdge(1, 2);
-        graph.addEdge(1, 3);
-        graph.addEdge(2, 3);
-        graph.addEdge(3, 0);
-        graph.addEdge(3, 2);
-        graph.addEdge(3, 4);
-        graph.addEdge(4, 2);
+        graph.addEdge(0, new Node('B', 18));
+        graph.addEdge(0, new Node('C', 14));
+        graph.addEdge(0, new Node('E', 16));
+        graph.addEdge(1, new Node('C', 2));
+        graph.addEdge(1, new Node('D', 10));
+        graph.addEdge(2, new Node('E', 6));
+        graph.addEdge(3, new Node('A', 3));
+        graph.addEdge(3, new Node('C', 15));
+        graph.addEdge(3, new Node('E', 11));
+        graph.addEdge(4, new Node('C', 17));
 
         graph.print();
 
