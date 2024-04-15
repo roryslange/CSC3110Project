@@ -32,6 +32,26 @@ public class Graph {
         return false;
     }
 
+    private LinkedList<Node> getNodeList(char src) {
+        for (LinkedList<Node> current : alist) {
+            if (current.get(0).data == src) {
+                return current;
+            }
+        }
+
+        return null;
+    }
+
+    private int getDistance(LinkedList<Node> list, char src) {
+        for (Node n : list) {
+            if (n.data == src) {
+                return n.weight;
+            }
+        }
+        
+        return Integer.MAX_VALUE; //cannot find node return large num
+    }
+
     private void removeEdge(int src, int dst) {
         LinkedList<Node> currentList = alist.get(src);
         LinkedList<Node> otherCurrentList = alist.get(dst);
@@ -43,6 +63,27 @@ public class Graph {
         }
     }
 
+    public int calculateCycle(char[] cycle) {
+        int sum = 0;
+        LinkedList<Node> currentList;
+        char currentChar, nextChar;
+        for (int i = 0; i < cycle.length; i++) {
+            if (i == cycle.length - 1) {
+                currentChar = cycle[i];
+                nextChar = cycle[0];
+            }
+            else {
+                currentChar = cycle[i];
+                nextChar = cycle[i+1];
+            }
+            currentList = getNodeList(currentChar);
+            sum += getDistance(currentList, nextChar);
+            System.out.println("add: " + getDistance(currentList, nextChar));
+        }
+
+        return sum;
+    }
+
     private void removeNode(Node node) {
 
     }
@@ -50,7 +91,7 @@ public class Graph {
     public void print() {
         for (LinkedList<Node> currentList : alist) {
             for (Node node : currentList) {
-                System.out.print(node.data + "|" + node.weight + " ->");
+                System.out.print(node.data + "|" + node.weight + " -> ");
             }
             System.out.println();
         }

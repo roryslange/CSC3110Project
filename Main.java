@@ -5,6 +5,7 @@ public class Main {
     public static void main(String[] args) {
         
         Graph graph = new Graph();
+        char[] cycle = {'C', 'E'};
 
         graph.addNode(new Node('A'));
         graph.addNode(new Node('B'));
@@ -24,6 +25,8 @@ public class Main {
         graph.addEdge(4, new Node('C', 17));
 
         graph.print();
+
+        System.out.println("C -> E cycle: " + graph.calculateCycle(cycle));
 
 
 
