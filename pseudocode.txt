@@ -4,12 +4,15 @@ void removeSmallestCycles(Graph g, List<CharacterArray> cycles) {
 
     for (cycle in cycles) { O(n)
         if (cycle <= smallestCycle) { O(1)
-            ToRemove.add(cycle)
-            smallestCycle = cycle.length
+            ToRemove.add(cycle) O(1)
+            smallestCycle = cycle.length O(1)
         }
     }
 
     for (cycle in ToRemove) { O(n)
-        g.removeCycle(cycle) O(n + n^2) => O(n^2)
+        g.removeEdges() O(n^2)
+        g.removeList() O(n)
     }
 }
+
+Overall time complexity = O(1 + 1 + n(1 + 1 + 1) + n(n^2 + n)) = O(1 + n + n^3 + n^2) => O(n^3)
