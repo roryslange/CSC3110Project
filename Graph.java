@@ -52,14 +52,14 @@ public class Graph {
         return Integer.MAX_VALUE; //cannot find node return large num
     }
 
-    private void removeEdge(int src, int dst) {
-        LinkedList<Node> currentList = alist.get(src);
-        LinkedList<Node> otherCurrentList = alist.get(dst);
-        Node dstNode = alist.get(dst).get(0);
-        Node otherDstNode = alist.get(src).get(0);
-        if (checkEdge(src, dst)) {
-            currentList.remove(dstNode);
-            otherCurrentList.remove(otherDstNode);
+    //removes a edge to node from all lists
+    private void removeEdgeAllLists(char src) {
+        for (LinkedList<Node> list : alist) {
+            for (Node node : list) {
+                if (node.data == src) {
+                    list.remove(node);
+                }
+            }
         }
     }
 
@@ -78,14 +78,28 @@ public class Graph {
             }
             currentList = getNodeList(currentChar);
             sum += getDistance(currentList, nextChar);
-            System.out.println("add: " + getDistance(currentList, nextChar));
+            //System.out.println("add: " + getDistance(currentList, nextChar));
         }
 
         return sum;
     }
 
-    private void removeNode(Node node) {
+    //only works for letters and assumes graphs are represented in alphabetical order
+    public void removeNode(char src) { 
+        LinkedList<Node> temp = new LinkedList<>(); 
+        for (LinkedList<Node> list : alist) {
+            if (list.get(0).data == src) {
+                temp = list;
+            }
+        }
+        alist.remove(temp);
+    }
 
+    public void removeCycle(char[] cycle) {
+        for (char current : cycle) {
+            removeNode(current);
+            removeEdgeAllLists(current);
+        }
     }
 
     public void print() {
